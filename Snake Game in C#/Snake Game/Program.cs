@@ -19,7 +19,7 @@ class SnakeGame
     static Random random = new Random();//for food apear in random place
 
     static bool gameOver = false;
-    static int Speed = 200; // Controls the game speed in miliseconds
+    static int Speed = 100; // Controls the game speed in miliseconds
 
     static void Main()
     {
@@ -100,7 +100,7 @@ class SnakeGame
 
     static void DrawGrid()
     {
-        Console.SetCursorPosition(0, 0);//set the cursor position at top left corner
+        Console.SetCursorPosition(0,0);//set the cursor position at top left corner
 
         // Top border
         Console.WriteLine(new string('-', screenWidth + 2));
@@ -114,7 +114,7 @@ class SnakeGame
             {
                 if (snake.Contains((i, j)))
                 {
-                    Console.Write("O");//snake body
+                    Console.Write("0");//snake body
                 }
                 else if (food == (i, j))
                 {
