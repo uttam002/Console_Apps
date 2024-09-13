@@ -102,15 +102,12 @@ namespace Tic_Tac_Toc_Game.Models
             }
             return choice;
         }
-        private static void DrawGameBoard(char currentPlayer, int row, int col)
-        {
-            
-        }
+       
 
         public void DrawBoard(String welcomeMessage, char currentPlayer,int row, int col)
         {
             //String welcomeMessage = "You Choose Multiplayer!";
-            int centerX = screenWidth / 2 - (welcomeMessage.Length / 2);//center of screen except title
+            /*int centerX = screenWidth / 2 - (welcomeMessage.Length / 2);//center of screen except title
             int topY = 7;
             char[] playerMarker = "X | 0".ToCharArray();
             int markerCenterX = screenWidth / 2 - (playerMarker.Length / 2);
@@ -128,14 +125,14 @@ namespace Tic_Tac_Toc_Game.Models
                 Console.WriteLine("|" + new string(' ', markerCenterX) + playerMarker + new string(' ', screenWidth - markerCenterX - playerMarker.Length) + '|');
                 for (int i = 0; i < topY / 2 - 1; i++) Console.WriteLine("|" + new string(' ', screenWidth) + "|");//for empty space and left and right border of screen
                 DrawGameBoard(currentPlayer, row, col);
-
             }
+*/
         }
-        private char[] BlinkMarker(char marker, char[] playerMarker)
+        /*private char[] BlinkMarker(char marker, char[] playerMarker)
         {
             if(marker == 'X') playerMarker = "  | 0".ToCharArray();
             else playerMarker = "X |  ".ToCharArray();
             return playerMarker;
-        }
+        }*/
     }
 }

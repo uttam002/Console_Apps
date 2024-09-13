@@ -21,7 +21,7 @@ namespace Tic_Tac_Toc_Game.Models
         public void PlayWithyourFriend()
         {
             String welcomeMessage = "You Choose Multiplayer!";
-            grid.DrawBoard(welcomeMessage);
+            //grid.DrawBoard(welcomeMessage);
         }
 
     }

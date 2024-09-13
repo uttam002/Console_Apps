@@ -12,14 +12,25 @@ public class Program
         if (choice)
         {
             Console.Clear();
+            // basic console output 
             Console.WriteLine("Hello Gamer Lets play with me ., my name is Lucifer ,i'm uttam's buddy!!!");
+            Console.WriteLine();
+            Console.WriteLine();
+            
+
             //game.PlaySinglePlayerGame();
         }
         else 
         {
             //game.PlayTwoPlayerGame();
         }
-       
+        Console.WriteLine("Press enter to exsit....");
+        var key = Console.ReadKey();
+        if (key.Key == ConsoleKey.Enter)
+        {
+            Environment.Exit(0);
+        }
+
     }
 }
     
