@@ -197,20 +197,21 @@ namespace Unit_Converter.Models
             int screenWidth = Console.WindowWidth;
 
             // Print the unit type
-            Console.SetCursorPosition((screenWidth - unitType.Length) / 2, 0);
+            Console.SetCursorPosition((screenWidth - unitType.Length) / 2, screenHeight / 2);
             Console.WriteLine(unitType);
 
             // Print the conversion line
-            Console.SetCursorPosition((screenWidth - (unit1.Length + 3 + unit2.Length)) / 2, 1);
+            Console.SetCursorPosition((screenWidth - (unit1.Length + 3 + unit2.Length)) / 2, screenHeight / 2 + 1);
             Console.WriteLine($"{unit1} -> {unit2}");
 
             // Print the value conversion
-            Console.SetCursorPosition((screenWidth - (val1.ToString("0.##").Length + 4 + val2.ToString("0.##").Length)) / 2, 2);
+            Console.SetCursorPosition((screenWidth - (val1.ToString("0.##").Length + 4 + val2.ToString("0.##").Length)) / 2, screenHeight/2 + 2);
             Console.WriteLine($"{val1:0.##} to {val2:0.##}");
 
             // Prompt the user if they want to use the converter again
-            Console.SetCursorPosition((screenWidth - 40) / 2, 4);
+            Console.SetCursorPosition((screenWidth - 40) / 2, screenHeight/2 + 4);
             Console.WriteLine("Do you want to use the unit converter app again? (y/n):");
+            Console.SetCursorPosition((screenWidth) / 2, screenHeight / 2 + 5);
 
             // Handle user input
             bool keepUsingApp = false;
