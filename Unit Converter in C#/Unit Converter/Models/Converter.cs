@@ -76,75 +76,306 @@ namespace Unit_Converter.Models
 
     internal class FrequencyConverter
     {
+        private static readonly double[] conversionFactors = new double[]
+        {
+        1,                             // Hertz (Hz)
+        1_000,                         // Kilohertz (kHz)
+        1_000_000,                     // Megahertz (MHz)
+        1_000_000_000,                 // Gigahertz (GHz)
+        1_000_000_000_000,             // Terahertz (THz)
+        1_000_000_000_000_000          // Petahertz (PHz)
+        };
+
         internal static double Convert(int index1, int index2, double inputVal)
         {
-            throw new NotImplementedException();
+            if (index1 < 0 || index1 >= conversionFactors.Length || index2 < 0 || index2 >= conversionFactors.Length)
+            {
+                throw new ArgumentOutOfRangeException("Invalid unit index");
+            }
+
+            // Convert the input value to Hertz (base unit)
+            double valueInHertz = inputVal * conversionFactors[index1];
+
+            // Convert the value from Hertz to the target unit
+            double convertedValue = valueInHertz / conversionFactors[index2];
+
+            return convertedValue;
         }
     }
+
 
     internal class AngleConverter
     {
+        private static readonly double[] conversionFactors = new double[]
+        {
+        Math.PI / 180,                // Degree (°)
+        1,                            // Radian (rad)
+        Math.PI / 200,                // Gradian (g)
+        Math.PI / 10_800,             // Minute of Arc (')
+        Math.PI / 648_000,            // Second of Arc (")
+        Math.PI / 200,                // Gon (equivalent to Gradian)
+        Math.PI / 6,                  // Sign
+        2 * Math.PI / 6_400,          // Mil
+        2 * Math.PI,                  // Revolution
+        2 * Math.PI,                  // Circle (equivalent to Revolution)
+        Math.PI / 2,                  // Right Angle
+        Math.PI / 3,                  // Sextant
+        Math.PI / 2,                  // Quadrant (equivalent to Right Angle)
+        Math.PI / 4                   // Octant
+        };
+
         internal static double Convert(int index1, int index2, double inputVal)
         {
-            throw new NotImplementedException();
+            if (index1 < 0 || index1 >= conversionFactors.Length || index2 < 0 || index2 >= conversionFactors.Length)
+            {
+                throw new ArgumentOutOfRangeException("Invalid unit index");
+            }
+
+            // Convert the input value to Radians (base unit)
+            double valueInRadians = inputVal * conversionFactors[index1];
+
+            // Convert the value from Radians to the target unit
+            double convertedValue = valueInRadians / conversionFactors[index2];
+
+            return convertedValue;
         }
     }
 
-    internal class DigitalStorageConverter
+
+    internal class DataStorageConverter
     {
+        private static readonly double[] conversionFactors = new double[]
+        {
+        1.0 / 8,                       // Bit
+        1,                             // Byte
+        125,                           // Kilobit (Kb)
+        1000,                          // Kilobyte (KB)
+        125_000,                       // Megabit (Mb)
+        1_000_000,                     // Megabyte (MB)
+        125_000_000,                   // Gigabit (Gb)
+        1_000_000_000,                 // Gigabyte (GB)
+        125_000_000_000,               // Terabit (Tb)
+        1_000_000_000_000,             // Terabyte (TB)
+        125_000_000_000_000,           // Petabit (Pb)
+        1_000_000_000_000_000,         // Petabyte (PB)
+        125_000_000_000_000_000,       // Exabit (Eb)
+        1_000_000_000_000_000_000      // Exabyte (EB)
+        };
+
         internal static double Convert(int index1, int index2, double inputVal)
         {
-            throw new NotImplementedException();
+            if (index1 < 0 || index1 >= conversionFactors.Length || index2 < 0 || index2 >= conversionFactors.Length)
+            {
+                throw new ArgumentOutOfRangeException("Invalid unit index");
+            }
+
+            // Convert the input value to Bytes (base unit)
+            double valueInBytes = inputVal * conversionFactors[index1];
+
+            // Convert the value from Bytes to the target unit
+            double convertedValue = valueInBytes / conversionFactors[index2];
+
+            return convertedValue;
         }
     }
+
 
     internal class PressureConverter
     {
+        private static readonly double[] conversionFactors = new double[]
+        {
+        1,               // Pascal (Pa)
+        1000,            // Kilopascal (kPa)
+        100,             // Hectopascal (hPa)
+        1000000,       // Megapascal (MPa)
+        100000,         // Bar
+        100,             // Millibar
+        0.1,             // Microbar
+        133.322,         // Millimeter of Mercury (mmHg)
+        3386.39,         // Inch of Mercury (inHg)
+        6894.76,         // Pound per Square Inch (psi)
+        6894760        // Kilopound per Square Inch (ksi)
+        };
+
         internal static double Convert(int index1, int index2, double inputVal)
         {
-            throw new NotImplementedException();
+            if (index1 < 0 || index1 >= conversionFactors.Length || index2 < 0 || index2 >= conversionFactors.Length)
+            {
+                throw new ArgumentOutOfRangeException("Invalid unit index");
+            }
+
+            // Convert the input value to Pascals (base unit)
+            double valueInPascals = inputVal * conversionFactors[index1];
+
+            // Convert the value from Pascals to the target unit
+            double convertedValue = valueInPascals / conversionFactors[index2];
+
+            return convertedValue;
         }
     }
+
 
     internal class PowerConverter
     {
+        private static readonly double[] conversionFactors = new double[]
+        {
+        1,            // Watt (W)
+        1000,         // Kilowatt (kW)
+        745.7,        // Horsepower (hp)
+        0.022597,     // Foot-Pound per Minute
+        17.584        // BTU per Minute
+        };
+
         internal static double Convert(int index1, int index2, double inputVal)
         {
-            throw new NotImplementedException();
+            if (index1 < 0 || index1 >= conversionFactors.Length || index2 < 0 || index2 >= conversionFactors.Length)
+            {
+                throw new ArgumentOutOfRangeException("Invalid unit index");
+            }
+
+            // Convert the input value to watts (base unit)
+            double valueInWatts = inputVal * conversionFactors[index1];
+
+            // Convert the value from watts to the target unit
+            double convertedValue = valueInWatts / conversionFactors[index2];
+
+            return convertedValue;
         }
     }
+
 
     internal class EnergyConverter
     {
+        private static readonly double[] conversionFactors = new double[]
+        {
+        1,                    // Joule (J)
+        1000,                 // Kilojoule (kJ)
+        4.184,                // Gram Calorie (cal)
+        4184,                 // Kilocalorie (kcal)
+        3600,                 // Watt Hour (Wh)
+        3.6e6,                // Kilowatt Hour (kWh)
+        1.60218e-19,          // Electronvolt (eV)
+        1055.06,              // British Thermal Unit (BTU)
+        1.055e8,              // US Therm
+        1.35582               // Foot-Pound
+        };
+
         internal static double Convert(int index1, int index2, double inputVal)
         {
-            throw new NotImplementedException();
+            if (index1 < 0 || index1 >= conversionFactors.Length || index2 < 0 || index2 >= conversionFactors.Length)
+            {
+                throw new ArgumentOutOfRangeException("Invalid unit index");
+            }
+
+            // Convert the input value to joules (base unit)
+            double valueInJoules = inputVal * conversionFactors[index1];
+
+            // Convert the value from joules to the target unit
+            double convertedValue = valueInJoules / conversionFactors[index2];
+
+            return convertedValue;
         }
     }
+
 
     internal class AreaConverter
     {
+        private static readonly double[] conversionFactors = new double[]
+        {
+        1e-6,         // Square Millimeter (mm²)
+        1e-4,         // Square Centimeter (cm²)
+        1,            // Square Meter (m²)
+        10000,        // Hectare (ha)
+        1e6,          // Square Kilometer (km²)
+        0.00064516,   // Square Inch (in²)
+        0.092903,     // Square Foot (ft²)
+        0.836127,     // Square Yard (yd²)
+        4046.86,      // Acre
+        2_589_988     // Square Mile (mi²)
+        };
+
         internal static double Convert(int index1, int index2, double inputVal)
         {
-            throw new NotImplementedException();
+            if (index1 < 0 || index1 >= conversionFactors.Length || index2 < 0 || index2 >= conversionFactors.Length)
+            {
+                throw new ArgumentOutOfRangeException("Invalid unit index");
+            }
+
+            // Convert the input value to square meters (base unit)
+            double valueInSquareMeters = inputVal * conversionFactors[index1];
+
+            // Convert the value from square meters to the target unit
+            double convertedValue = valueInSquareMeters / conversionFactors[index2];
+
+            return convertedValue;
         }
     }
+
 
     internal class SpeedConverter
     {
+        private static readonly double[] conversionFactors = new double[]
+        {
+        1,             // Meters per Second (m/s)
+        1 / 3.6,       // Kilometers per Hour (km/h)
+        0.44704,       // Miles per Hour (mph)
+        0.3048,        // Feet per Second (ft/s)
+        0.514444       // Knots (kn)
+        };
+
         internal static double Convert(int index1, int index2, double inputVal)
         {
-            throw new NotImplementedException();
+            if (index1 < 0 || index1 >= conversionFactors.Length || index2 < 0 || index2 >= conversionFactors.Length)
+            {
+                throw new ArgumentOutOfRangeException("Invalid unit index");
+            }
+
+            // Convert the input value to meters per second (base unit)
+            double valueInMetersPerSecond = inputVal * conversionFactors[index1];
+
+            // Convert the value from meters per second to the target unit
+            double convertedValue = valueInMetersPerSecond / conversionFactors[index2];
+
+            return convertedValue;
         }
     }
 
+
     internal class TimeConverter
     {
+        private static readonly double[] conversionFactors = new double[]
+        {
+        1e-9,          // Nanosecond
+        1e-6,          // Microsecond
+        0.001,         // Millisecond
+        1,             // Second
+        60,            // Minute
+        3600,          // Hour
+        86400,         // Day
+        604800,        // Week
+        2628000,       // Month (average)
+        31536000,      // Year (non-leap)
+        315360000,     // Decade
+        3153600000     // Century
+        };
+
         internal static double Convert(int index1, int index2, double inputVal)
         {
-            throw new NotImplementedException();
+            if (index1 < 0 || index1 >= conversionFactors.Length || index2 < 0 || index2 >= conversionFactors.Length)
+            {
+                throw new ArgumentOutOfRangeException("Invalid unit index");
+            }
+
+            // Convert the input value to seconds (base unit)
+            double valueInSeconds = inputVal * conversionFactors[index1];
+
+            // Convert the value from seconds to the target unit
+            double convertedValue = valueInSeconds / conversionFactors[index2];
+
+            return convertedValue;
         }
     }
+
 
     internal class TemperatureConverter
     {
