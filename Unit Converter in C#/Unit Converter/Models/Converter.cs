@@ -58,7 +58,7 @@ namespace Unit_Converter.Models
                     result = PressureConverter.Convert(index1, index2, inputVal);
                     break;
                 case "Digital Storage":
-                    result = DigitalStorageConverter.Convert(index1, index2, inputVal);
+                    result = DataStorageConverter.Convert(index1, index2, inputVal);
                     break;
                 case "Angle":
                     result = AngleConverter.Convert(index1, index2, inputVal);

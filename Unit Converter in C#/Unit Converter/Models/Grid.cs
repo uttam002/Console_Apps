@@ -35,7 +35,7 @@ namespace Unit_Converter.Models
 
                 Console.WriteLine(new string('-', screenWidth + 2));//bottom border of screen
 
-                Console.WriteLine("\nPress Enter to start...");
+                Console.WriteLine("\nPress Enter for next move...");
 
                 //if user press enter then break the loop
                 if (Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.Enter) break;
@@ -127,66 +127,110 @@ namespace Unit_Converter.Models
             return selectedIndex; // return the selected unit
         }
 
-        public static double GetUnitValue(string unitName)
-        {
-            string valueStr = "";  // To store the input value as a string
-            bool inputComplete = false;
-            int centerX = screenWidth / 2;
-            int centerY = screenHeight / 2;
-
-            while (!inputComplete)
+        internal static double GetUnitValue(string unitName)
             {
-                Console.Clear();
-                Console.SetCursorPosition(0, 0); // Set the cursor to the top-left corner (x=0, y=0)
-                Console.WriteLine(new string('-', screenWidth + 2)); // top border of screen
+                string valueStr = "";  // To store the input value as a string
+                bool inputComplete = false;
+                int centerX = screenWidth / 2;
+                int centerY = screenHeight / 2;
 
-                // Calculate vertical padding for centering the input prompt
-                int promptPadding = centerY - 2;
+                while (!inputComplete)
+                {
+                    Console.Clear();
+                    Console.SetCursorPosition(0, 0); // Set the cursor to the top-left corner (x=0, y=0)
+                    Console.WriteLine(new string('-', screenWidth + 2)); // top border of screen
 
-                // Print empty lines before the input prompt to center it vertically
-                for (int i = 0; i < promptPadding; i++)
+                    // Calculate vertical padding for centering the input prompt
+                    int promptPadding = centerY - 2;
+
+                    // Print empty lines before the input prompt to center it vertically
+                    for (int i = 0; i < promptPadding; i++)
+                        Console.WriteLine("|" + new string(' ', screenWidth) + '|');
+
+                    // Center the prompt message horizontally
+                    string title = $"Enter the value for {unitName}:";
+                    int promptCenterX = centerX - (title.Length / 2);
+                    Console.WriteLine("|" + new string(' ', promptCenterX) + title + new string(' ', screenWidth - promptCenterX - title.Length) + '|');
+
+                    // Print an empty line to add spacing between prompt and value input
                     Console.WriteLine("|" + new string(' ', screenWidth) + '|');
 
-                // Center the prompt message horizontally
-                string title = $"Enter the value for {unitName}:";
-                int promptCenterX = centerX - (title.Length / 2);
-                Console.WriteLine("|" + new string(' ', promptCenterX) + title + new string(' ', screenWidth - promptCenterX - title.Length) + '|');
+                    // Center the current input value horizontally
+                    int valueCenterX = centerX - (valueStr.Length / 2);
+                    Console.WriteLine("|" + new string(' ', valueCenterX) + valueStr + new string(' ', screenWidth - valueCenterX - valueStr.Length) + '|');
 
-                // Print an empty line to add spacing between prompt and value input
-                Console.WriteLine("|" + new string(' ', screenWidth) + '|');
+                    // Fill the remaining space at the bottom
+                    for (int i = centerY + 2; i < screenHeight - 1; i++)
+                        Console.WriteLine("|" + new string(' ', screenWidth) + '|');
 
-                // Center the current input value horizontally
-                int valueCenterX = centerX - (valueStr.Length / 2);
-                Console.WriteLine("|" + new string(' ', valueCenterX) + valueStr + new string(' ', screenWidth - valueCenterX - valueStr.Length) + '|');
+                    Console.WriteLine(new string('-', screenWidth + 2)); // bottom border of screen
 
-                // Fill the remaining space at the bottom
-                for (int i = centerY + 2; i < screenHeight - 1; i++)
-                    Console.WriteLine("|" + new string(' ', screenWidth) + '|');
+                    // Handle user input for entering the value
+                    ConsoleKeyInfo keyInfo = Console.ReadKey(true);
 
-                Console.WriteLine(new string('-', screenWidth + 2)); // bottom border of screen
+                    // If the key is a digit or period, add it to the input string
+                    if (char.IsDigit(keyInfo.KeyChar) || keyInfo.KeyChar == '.')
+                    {
+                        valueStr += keyInfo.KeyChar;
+                    }
+                    else if (keyInfo.Key == ConsoleKey.Backspace && valueStr.Length > 0)
+                    {
+                        // Remove the last character when backspace is pressed
+                        valueStr = valueStr.Substring(0, valueStr.Length - 1);
+                    }
+                    else if (keyInfo.Key == ConsoleKey.Enter && !string.IsNullOrEmpty(valueStr))
+                    {
+                        // When Enter is pressed and input is valid, complete the input
+                        inputComplete = true;
+                    }
+                }
 
-                // Handle user input for entering the value
+                // Convert the input string to a double and return the value
+                return double.Parse(valueStr);
+            }
+
+        internal static bool ShowUnitConversion(string unitType, string unit1, string unit2, double val1, double val2)
+        {
+            Console.Clear();
+
+            // Define the width for formatting the output
+            int screenWidth = Console.WindowWidth;
+
+            // Print the unit type
+            Console.SetCursorPosition((screenWidth - unitType.Length) / 2, 0);
+            Console.WriteLine(unitType);
+
+            // Print the conversion line
+            Console.SetCursorPosition((screenWidth - (unit1.Length + 3 + unit2.Length)) / 2, 1);
+            Console.WriteLine($"{unit1} -> {unit2}");
+
+            // Print the value conversion
+            Console.SetCursorPosition((screenWidth - (val1.ToString("0.##").Length + 4 + val2.ToString("0.##").Length)) / 2, 2);
+            Console.WriteLine($"{val1:0.##} to {val2:0.##}");
+
+            // Prompt the user if they want to use the converter again
+            Console.SetCursorPosition((screenWidth - 40) / 2, 4);
+            Console.WriteLine("Do you want to use the unit converter app again? (y/n):");
+
+            // Handle user input
+            bool keepUsingApp = false;
+            while (true)
+            {
                 ConsoleKeyInfo keyInfo = Console.ReadKey(true);
 
-                // If the key is a digit or period, add it to the input string
-                if (char.IsDigit(keyInfo.KeyChar) || keyInfo.KeyChar == '.')
+                if (keyInfo.Key == ConsoleKey.Y)
                 {
-                    valueStr += keyInfo.KeyChar;
+                    keepUsingApp = true;
+                    break;
                 }
-                else if (keyInfo.Key == ConsoleKey.Backspace && valueStr.Length > 0)
+                else if (keyInfo.Key == ConsoleKey.N)
                 {
-                    // Remove the last character when backspace is pressed
-                    valueStr = valueStr.Substring(0, valueStr.Length - 1);
-                }
-                else if (keyInfo.Key == ConsoleKey.Enter && !string.IsNullOrEmpty(valueStr))
-                {
-                    // When Enter is pressed and input is valid, complete the input
-                    inputComplete = true;
+                    keepUsingApp = false;
+                    break;
                 }
             }
 
-            // Convert the input string to a double and return the value
-            return double.Parse(valueStr);
+            return keepUsingApp;
         }
 
 
