@@ -8,6 +8,7 @@ namespace UnitConverter
         public static void Main(string[] args)
         {
             Controller _controller = new Controller();
+         
             _controller.StartApp();
             //Converter converter = new Converter(unit);
         }

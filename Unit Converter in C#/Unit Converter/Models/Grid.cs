@@ -43,8 +43,8 @@ namespace Unit_Converter.Models
                 //for blinking effect
                 flag = !flag;
                 Thread.Sleep(500);//in miliseconds
-                Console.Clear();
                 Console.SetCursorPosition(0, 0); // Set the cursor to the top-left corner (x=0, y=0)
+                Console.Clear();
             }
             Console.Clear();
 
@@ -59,8 +59,8 @@ namespace Unit_Converter.Models
 
             while (true)
             {
-                Console.Clear();
                 Console.SetCursorPosition(0, 0); // Set the cursor to the top-left corner (x=0, y=0)
+                Console.Clear();
                 Console.WriteLine(new string('-', screenWidth + 2)); // top border of screen
 
                 // Split the title by newline character to handle multi-line titles
@@ -205,7 +205,7 @@ namespace Unit_Converter.Models
             Console.WriteLine($"{unit1} -> {unit2}");
 
             // Print the value conversion
-            Console.SetCursorPosition((screenWidth - (val1.ToString("0.##").Length + 4 + val2.ToString("0.##").Length)) / 2, screenHeight/2 + 2);
+            Console.SetCursorPosition((screenWidth - (val1.ToString("0.##").Length + 4 + val2.ToString("0.##").Length)) / 2, screenHeight/2 + 2 );
             Console.WriteLine($"{val1:0.##} to {val2:0.##}");
 
             // Prompt the user if they want to use the converter again

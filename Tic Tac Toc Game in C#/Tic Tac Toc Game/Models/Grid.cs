@@ -14,15 +14,18 @@ namespace Tic_Tac_Toc_Game.Models
         static int screenHeight = 10;
 
         public const int GameBoardSize = 11;
-        public bool WelcomeGrid() {
-            //bool choice = false;
-            String welcomeMessage = "Welcome to Tic Tac Toe Game!";
-            int centerX = screenWidth / 2 - (welcomeMessage.Length / 2);//center of screen except title
-            int centerY = screenHeight / 2;//center of screen
-            bool flag = true;//show title or not
+        internal static void Welcomegrid(String welcomeMessage)
+        {
+            Console.Clear();
+            Console.SetCursorPosition(0, 0); // Set the cursor to the top-left corner (x=0, y=0)
+            int centerX = screenWidth / 2 - (welcomeMessage.Length / 2);
+            int centerY = screenHeight / 2;
 
+            bool flag = true;//show title or not
             while (true)//for blinking effect of title
             {
+                Console.SetCursorPosition(0, 0);
+
                 Console.WriteLine(new string('-', screenWidth + 2));//top border of screen
                 for (int i = 0; i < centerY - 1; i++) Console.WriteLine("|" + new string(' ', screenWidth) + "|");//for empty space and left and right border of screen
 
@@ -35,21 +38,22 @@ namespace Tic_Tac_Toc_Game.Models
 
                 Console.WriteLine(new string('-', screenWidth + 2));//bottom border of screen
 
-                Console.WriteLine("\nPress Enter to start...");
+                Console.WriteLine("\nPress Enter for next move...");
 
                 //if user press enter then break the loop
                 if (Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.Enter) break;
 
                 //for blinking effect
                 flag = !flag;
-                Thread.Sleep(450);//in miliseconds
+                Thread.Sleep(500);//in miliseconds
+                Console.SetCursorPosition(0, 0); // Set the cursor to the top-left corner (x=0, y=0)
                 Console.Clear();
             }
             Console.Clear();
 
-            return ChooseGameMode();
         }
-        private bool ChooseGameMode() {
+        internal static bool ChooseGameMode()
+        {
             bool choice = true;//at start choice is true means play with computer
             String welcomeMessage = "Choose Game Mode!";
             String choice1 = "Play with Computer";
@@ -102,37 +106,53 @@ namespace Tic_Tac_Toc_Game.Models
             }
             return choice;
         }
-       
-
-        public void DrawBoard(String welcomeMessage, char currentPlayer,int row, int col)
+        internal static void DrawGrid(string title, int[,] positions)
         {
-            //String welcomeMessage = "You Choose Multiplayer!";
-            /*int centerX = screenWidth / 2 - (welcomeMessage.Length / 2);//center of screen except title
-            int topY = 7;
-            char[] playerMarker = "X | 0".ToCharArray();
-            int markerCenterX = screenWidth / 2 - (playerMarker.Length / 2);
+            int gridSize = 3; // Assuming a 3x3 Tic-Tac-Toe grid
+            Console.Clear();
 
-            while (true)
+            // Display the title at the top
+            Console.WriteLine(title);
+            Console.WriteLine(new string('-', 13)); // A simple line separator
+
+            for (int row = 0; row < gridSize; row++)
             {
-                Console.WriteLine(new string('-', screenWidth + 2));//top border of screen
-                for (int i = 0; i < topY / 2 - 1; i++) Console.WriteLine("|" + new string(' ', screenWidth) + "|");//for empty space and left and right border of screen
-                Console.WriteLine("|" + new string(' ', centerX) + welcomeMessage + new string(' ', screenWidth - centerX - welcomeMessage.Length) + '|');//title at center of screen 
-                for (int i = 0; i < topY / 2; i++) Console.WriteLine("|" + new string(' ', screenWidth) + "|");//for empty space and left and right border of screen
-               for(int i = 0; i < 3; i++)
+                // Print each row of the grid
+                for (int col = 0; col < gridSize; col++)
                 {
+                    // Determine what to print in each cell (X, O, or empty)
+                    string cellContent;
+                    switch (positions[row, col])
+                    {
+                        case 1:
+                            cellContent = "X"; // Player 1
+                            break;
+                        case 2:
+                            cellContent = "O"; // Player 2
+                            break;
+                        default:
+                            cellContent = " "; // Empty cell
+                            break;
+                    }
 
+                    // Print cell with appropriate formatting
+                    Console.Write($" {cellContent} ");
+                    if (col < gridSize - 1)
+                        Console.Write("|"); // Separate columns
                 }
-                Console.WriteLine("|" + new string(' ', markerCenterX) + playerMarker + new string(' ', screenWidth - markerCenterX - playerMarker.Length) + '|');
-                for (int i = 0; i < topY / 2 - 1; i++) Console.WriteLine("|" + new string(' ', screenWidth) + "|");//for empty space and left and right border of screen
-                DrawGameBoard(currentPlayer, row, col);
+
+                Console.WriteLine(); // Move to the next line after each row
+
+                if (row < gridSize - 1)
+                {
+                    // Print row separator
+                    Console.WriteLine("---+---+---");
+                }
             }
-*/
+
+            Console.WriteLine(new string('-', 13)); // Bottom border
         }
-        /*private char[] BlinkMarker(char marker, char[] playerMarker)
-        {
-            if(marker == 'X') playerMarker = "  | 0".ToCharArray();
-            else playerMarker = "X |  ".ToCharArray();
-            return playerMarker;
-        }*/
+
+
     }
 }

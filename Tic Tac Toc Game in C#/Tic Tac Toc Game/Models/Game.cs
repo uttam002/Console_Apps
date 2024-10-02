@@ -6,23 +6,47 @@ using System.Threading.Tasks;
 
 namespace Tic_Tac_Toc_Game.Models
 {
-    public class Game
+    internal class Game
     {
-        private Grid grid;
+        private Grid grid = new Grid();
         private ComputerAsPlayer computerAsPlayer;
-        private WinningLogic winningLogic;
+        private WinningLogic winningLogic = new WinningLogic();
 
-        public Game(){
-            this.grid = new Grid();
-            this.computerAsPlayer = new ComputerAsPlayer();
-            this.winningLogic = new WinningLogic(); 
-        }
+        static int[,] positions = new int[3, 3]; // 3x3 grid for a Tic-Tac-Toe game
 
-        public void PlayWithyourFriend()
+        public void StartApp()
         {
-            String welcomeMessage = "You Choose Multiplayer!";
-            //grid.DrawBoard(welcomeMessage);
-        }
+            String title = string.Empty;
 
+            title = "Welcome to Unit Converter App";
+            Grid.Welcomegrid(title);
+
+            bool choice= Grid.ChooseGameMode();
+
+            if (choice)
+            {
+                
+                title = "You are playing with Computer";
+                playGame(title,);
+
+            }
+            else
+            {
+                title = "You are playing with Friend";
+                playGame(title);
+            }
+        }
+        private void playGame(string title)
+        {
+            while (true)
+            {
+                Grid.DrawGrid(title, positions);
+                int winner = winningLogic.CheckWinner(positions);
+                if (winningLogic != null)
+                {
+
+                }
+            }
+        }
     }
 }

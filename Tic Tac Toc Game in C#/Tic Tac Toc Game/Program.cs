@@ -1,36 +1,18 @@
-﻿using Tic_Tac_Toc_Game.Models;
+﻿using System;
+using Tic_Tac_Toc_Game.Models;
 
-public class Program
+namespace Tic_Tac_Toe_Game
 {
-    public static void Main(string[] args)
+    class Program
     {
-        Game game = new Game(); 
-        Grid grid = new Grid();
-
-        bool choice = grid.WelcomeGrid();
-
-        if (choice)
+        public static void Main(string[] args)
         {
-            Console.Clear();
-            // basic console output 
-            Console.WriteLine("Hello Gamer Lets play with me ., my name is Lucifer ,i'm uttam's buddy!!!");
-            Console.WriteLine();
-            Console.WriteLine();
-            
+            Game Game = new Game();
 
-            //game.PlaySinglePlayerGame();
+            Game.StartApp();
+            //Converter converter = new Converter(unit);
         }
-        else 
-        {
-            //game.PlayTwoPlayerGame();
-        }
-        Console.WriteLine("Press enter to exsit....");
-        var key = Console.ReadKey();
-        if (key.Key == ConsoleKey.Enter)
-        {
-            Environment.Exit(0);
-        }
-
     }
+
 }
-    
+
