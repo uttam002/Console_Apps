@@ -12,6 +12,7 @@ namespace MyConsoleApp
 
             // Create an instance of AppStarter and call RunApp
             var appStarter = new CalculatorEngine();
+            Console.ReadKey();
             appStarter.RunApp();
 
             Console.WriteLine("Press any key to exit...");
