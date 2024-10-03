@@ -8,6 +8,11 @@ namespace Calculator_in_C_.Modules
 {
     internal class Logic
     {
+        internal double Evaluate(string display)
+        {
+            throw new NotImplementedException();
+        }
+
         internal double evaluateExpression(string input)
         {
             throw new NotImplementedException();

@@ -53,10 +53,11 @@ namespace Calculator_in_C_.Modules
                     }
                 }
                 Console.WriteLine(new string('-', sW + 2));
-                HandleInput();
+                Console.WriteLine("Enter 'c' for clear display \n Enter 'E' to exit!!!");
+                if (HandleInput()) break; // Exit when the user presses '=' or Enter
             }
         }
-        private void HandleInput()
+        private bool HandleInput()
         {
             var key = Console.ReadKey(true).KeyChar;
             if (key == '.' || key == '*' || key == '/' || key == '+' || key == '-' || char.IsDigit(key)) display += key; // Display your current input
@@ -64,8 +65,7 @@ namespace Calculator_in_C_.Modules
             {
                 try
                 {
-                    var logic = new Logic();
-                    display = logic.Evaluate(display).ToString();
+                    return true; // Signal to return the input for further calculation
                 }
                 catch
                 {
@@ -73,6 +73,12 @@ namespace Calculator_in_C_.Modules
                 }
             }
             else if (key == 'c' || key == 'C') display = "";//clear display
+            else if (key == 'e' || key == 'E') //exit
+            {
+                display = "exit";
+                return true;
+            }
+                return false;// Continue capturing input
         }
 
         internal void goodByeDisply()
