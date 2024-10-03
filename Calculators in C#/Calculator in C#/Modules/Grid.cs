@@ -28,8 +28,10 @@ namespace Calculator_in_C_.Modules
         internal string getInput()
         {
             showCalculator();
+           
             return display;
         }
+
 
         private void showCalculator()
         {
@@ -51,7 +53,26 @@ namespace Calculator_in_C_.Modules
                     }
                 }
                 Console.WriteLine(new string('-', sW + 2));
+                HandleInput();
             }
+        }
+        private void HandleInput()
+        {
+            var key = Console.ReadKey(true).KeyChar;
+            if (key == '.' || key == '*' || key == '/' || key == '+' || key == '-' || char.IsDigit(key)) display += key; // Display your current input
+            else if (key == '=' || key == '\r')// '\r' is for Enter
+            {
+                try
+                {
+                    var logic = new Logic();
+                    display = logic.Evaluate(display).ToString();
+                }
+                catch
+                {
+                    display += "error";
+                }
+            }
+            else if (key == 'c' || key == 'C') display = "";//clear display
         }
 
         internal void goodByeDisply()
