@@ -20,7 +20,7 @@ namespace Calculator_in_C_.Modules
         {
             while (true)
             {
-                grid.getIntro();
+                grid.getIntro ();
 
                 string input = grid.getInput();
 
@@ -31,7 +31,8 @@ namespace Calculator_in_C_.Modules
                 }
                 try
                 {
-                    double result = logic.evaluateExpression(input);
+                    double result = logic.EvaluateExpression(input);
+                    grid.updateDisplay(result.ToString()); // Update the display with the result
                 }
                 catch (Exception ex)
                 {
